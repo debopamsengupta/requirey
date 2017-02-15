@@ -1,0 +1,23 @@
+{
+  "name": "oc-require",
+  "version": "1.0.0",
+  "description": "wrapper of require to fetch correct versions of components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/debopamsengupta/oc-require.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/debopamsengupta/oc-require/issues"
+  },
+  "homepage": "https://github.com/debopamsengupta/oc-require#readme",
+  "dependencies": {
+    "npm-install-version": "^6.0.1",
+    "semver": "^5.3.0"
+  }
+}
