@@ -19,20 +19,38 @@ const oc_require = (moduleName) => {
 		return require(moduleName); //if no such module is installed
 	}
 	const version_needed = currentPkg.dependencies[moduleName];
-	const satisfying_versions = versions.filter((v) => {
-		return semver.satisfies(v, version_needed);
-	});
+	const satisfying_version = _satisfier(version_needed, versions);
 
-	if (satisfying_versions.length === 0) {
+	if (!satisfying_version) {
 		return require(moduleName); //module installed but not satisfying version [hope to avoid]
 	}
+	return niv.require(`${moduleName}@${satisfying_version}`);
+}
 
-	const final_version = satisfying_versions.sort(semver.rcompare).shift();
-	return niv.require(`${moduleName}@${final_version}`);
+const _satisfier = (version, version_list) => {
+	return semver.maxSatisfying(version_list, version);
+}
+
+const oc_install = (pkg) => {
+	let install_package = currentPkg || pkg;
+	const deps = install_package.dependencies;
+	for(dep in deps) {
+		if (!_satisfier(deps[dep], global_config[dep])) {
+			let valid_version = semver.validRange(deps[dep], true);
+			let clean_version = valid_version.split(' ')[0].replace(/(>|=)/g, '');
+			niv.install(`${dep}@${clean_version}`);
+			if (!global_config[dep]) {
+				global_config[dep] = [];
+			}
+			global_config[dep].push(clean_version);
+		}
+	}
+	return global_config;
 }
 
 module.exports = {
 	init: init,
 	setPackage: setPackage,
-	require: oc_require
+	require: oc_require,
+	install: oc_install
 };
