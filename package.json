@@ -1,23 +1,35 @@
 {
-  "name": "oc-require",
+  "name": "multi-require",
   "version": "1.0.0",
-  "description": "wrapper of require to fetch correct versions of components",
-  "main": "index.js",
+  "description": "extending require to work with multiple versions of modules",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "build": "babel src --source-maps --out-dir dist --ignore '**/*.test.js",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/debopamsengupta/oc-require.git"
+    "url": "git+https://github.com/debopamsengupta/extend-require.git"
   },
   "author": "",
   "license": "ISC",
+  "files": [
+    "dist",
+    "src"
+  ],
   "bugs": {
-    "url": "https://github.com/debopamsengupta/oc-require/issues"
+    "url": "https://github.com/debopamsengupta/extend-require/issues"
   },
-  "homepage": "https://github.com/debopamsengupta/oc-require#readme",
+  "homepage": "https://github.com/debopamsengupta/extend-require#readme",
   "dependencies": {
     "npm-install-version": "^6.0.1",
     "semver": "^5.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.3.3",
+    "jest": "^19.0.2",
+    "shelljs": "^0.7.7"
   }
 }
