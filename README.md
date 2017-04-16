@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.com/debopamsengupta/requirey.svg?token=zze2MnUp2eyrptz4zeGp&branch=master)](https://travis-ci.com/debopamsengupta/requirey)
+[![npm version](https://badge.fury.io/js/requirey.svg)](https://badge.fury.io/js/requirey)
+[![Build Status](https://travis-ci.org/debopamsengupta/requirey.svg?branch=master)](https://travis-ci.org/debopamsengupta/requirey)
+
 
 # requirey
 Intelligent multi-version dependency management for npm packages.
