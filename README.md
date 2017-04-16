@@ -1,8 +1,8 @@
 [![npm version](https://img.shields.io/npm/v/requirey.svg)](https://www.npmjs.com/package/requirey)
 [![Build Status](https://img.shields.io/travis/debopamsengupta/requirey.svg)](https://travis-ci.org/debopamsengupta/requirey)
 
+![Logo](https://www.dropbox.com/s/a89s7cegzye0d79/requirey.png?dl=1)
 
-# requirey
 Intelligent multi-version dependency management for npm packages.
 
 ### Install
