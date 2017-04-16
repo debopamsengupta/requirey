@@ -1,6 +1,6 @@
 {
   "name": "requirey",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "extending require to work with multiple versions of modules",
   "main": "dist/index.js",
   "scripts": {
@@ -12,6 +12,12 @@
     "type": "git",
     "url": "git+https://github.com/debopamsengupta/requirey.git"
   },
+  "keywords": [
+    "npm",
+    "multi-version",
+    "package",
+    "dependency-manager"
+  ],
   "author": "debopamsengupta",
   "license": "ISC",
   "files": [

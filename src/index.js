@@ -8,13 +8,6 @@ class Requirer {
 		this.pkgJson = pkg;
 	}
 
-	satisfier(version, version_list) {
-		if (version_list.length === 0) {
-			return null;
-		}
-		return semver.maxSatisfying(version_list, version);
-	}
-
 	require(name, version, force) {
 		if (name.split('@')[1]) {
 			version = name.split('@')[1];
@@ -22,12 +15,19 @@ class Requirer {
 		}
 		const versionList = config[name] || [];
 		const version_needed = version || (this.pkgJson ? this.pkgJson.dependencies[name] : '*');
-		const satisfying_version  = force ? version : this.satisfier(version_needed, versionList);
+		const satisfying_version  = force ? version : satisfier(version_needed, versionList);
 		if (!satisfying_version) {
 			throw Error('no satisfying version found');
 		}
 		return niv.require(`${name}@${satisfying_version}`);
 	}
+};
+
+const satisfier = (version, version_list) => {
+	if (version_list.length === 0) {
+		return null;
+	}
+	return semver.maxSatisfying(version_list, version);
 };
 
 const installAll = () => {
