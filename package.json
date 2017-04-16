@@ -1,5 +1,5 @@
 {
-  "name": "multi-require",
+  "name": "requirey",
   "version": "1.0.0",
   "description": "extending require to work with multiple versions of modules",
   "main": "dist/index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/debopamsengupta/extend-require.git"
+    "url": "git+https://github.com/debopamsengupta/requirey.git"
   },
   "author": "",
   "license": "ISC",
@@ -19,9 +19,9 @@
     "src"
   ],
   "bugs": {
-    "url": "https://github.com/debopamsengupta/extend-require/issues"
+    "url": "https://github.com/debopamsengupta/requirey/issues"
   },
-  "homepage": "https://github.com/debopamsengupta/extend-require#readme",
+  "homepage": "https://github.com/debopamsengupta/requirey#readme",
   "dependencies": {
     "npm-install-version": "^6.0.1",
     "semver": "^5.3.0"

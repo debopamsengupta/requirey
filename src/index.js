@@ -15,7 +15,7 @@ class Requirer {
 		return semver.maxSatisfying(version_list, version);
 	}
 
-	multi_require(name, version, force) {
+	require(name, version, force) {
 		if (name.split('@')[1]) {
 			version = name.split('@')[1];
 			name = name.split('@')[0];
@@ -45,7 +45,7 @@ const install = (name, version) => {
 	niv.install(`${name}@${clean_version}`);
 };
 
-export default function(opts, override) {
+module.exports = function(opts, override) {
 	if (override) {
 		Object.keys(config).forEach((key) => {
 			delete config[key];
