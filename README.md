@@ -57,3 +57,7 @@ The `require` method also takes an optional third parameter:
 requirer.require('lodash', '4.0.0', true);
 ```
 
+#### Built Using
+
+- [npm-install-version](https://www.npmjs.com/package/npm-install-version)
+- [semver](https://www.npmjs.com/package/semver)
