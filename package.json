@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/debopamsengupta/requirey.git"
   },
-  "author": "",
+  "author": "debopamsengupta",
   "license": "ISC",
   "files": [
     "dist",
