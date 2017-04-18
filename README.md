@@ -1,5 +1,6 @@
 [![npm version](https://img.shields.io/npm/v/requirey.svg)](https://www.npmjs.com/package/requirey)
 [![Build Status](https://img.shields.io/travis/debopamsengupta/requirey.svg)](https://travis-ci.org/debopamsengupta/requirey)
+[![Windows Build Status](https://img.shields.io/appveyor/ci/debopamsengupta/requirey.svg?label=appveyor)](https://ci.appveyor.com/project/debopamsengupta/requirey)
 
 ![Logo](https://www.dropbox.com/s/a89s7cegzye0d79/requirey.png?dl=1)
 
