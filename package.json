@@ -1,6 +1,6 @@
 {
   "name": "requirey",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "extending require to work with multiple versions of modules",
   "main": "dist/index.js",
   "scripts": {
@@ -16,10 +16,11 @@
     "npm",
     "multi-version",
     "package",
-    "dependency-manager"
+    "dependency-manager",
+    "require"
   ],
   "author": "debopamsengupta",
-  "license": "ISC",
+  "license": "MIT",
   "files": [
     "dist",
     "src"
