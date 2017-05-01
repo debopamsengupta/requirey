@@ -7,7 +7,7 @@
     "test": "jest && npm run integration",
     "build": "babel src --source-maps --out-dir dist --ignore '**/*.test.js'",
     "prepublish": "npm run build",
-    "integration": "npm run build && mocha integration/integration.js"
+    "integration": "npm run build && mocha integration/integration.js --timeout 10000"
   },
   "repository": {
     "type": "git",

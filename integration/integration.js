@@ -11,7 +11,7 @@ describe('requirey - integration', () => {
     ry = requirey(config);
   });
 
-  it('should install all and be requireable', () => {
+  it('should install all and be requireable', (done) => {
     ry.installAll();
     let requirer = new ry.Requirer();
     let a = requirer.require('lodash@1.3.1');
@@ -22,6 +22,8 @@ describe('requirey - integration', () => {
 
     let c = requirer.require('lodash@3.10.1');
     expect(c.VERSION).to.equal('3.10.1');
+
+    done();
   });
 
   it('should find correct version intelligently', () => {
