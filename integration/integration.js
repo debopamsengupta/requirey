@@ -1,4 +1,5 @@
-import requirey from '../src/index';
+const requirey = require('../dist/index');
+const expect = require('chai').expect;
 
 const config = {
   lodash: ['1.3.1', '2.4.2', '3.10.1']
@@ -6,7 +7,7 @@ const config = {
 
 describe('requirey - integration', () => {
   let ry;
-  beforeAll(() => {
+  before(() => {
     ry = requirey(config);
   });
 
@@ -14,24 +15,13 @@ describe('requirey - integration', () => {
     ry.installAll();
     let requirer = new ry.Requirer();
     let a = requirer.require('lodash@1.3.1');
-    let b = requirer.require('lodash@2.4.2');
-    let c = requirer.require('lodash@3.10.1');
-
-    expect(a).toBeTruthy();
-    expect(b).toBeTruthy();
-    expect(c).toBeTruthy();
-  });
-
-  it('should fetch correct version', () => {
-    let requirer = new ry.Requirer();
-    let a = requirer.require('lodash@1.3.1');
-    expect(a.VERSION).toBe('1.3.1'); 
+    expect(a.VERSION).to.equal('1.3.1'); 
 
     let b = requirer.require('lodash@2.4.2');
-    expect(b.VERSION).toBe('2.4.2');
+    expect(b.VERSION).to.equal('2.4.2');
 
     let c = requirer.require('lodash@3.10.1');
-    expect(c.VERSION).toBe('3.10.1');
+    expect(c.VERSION).to.equal('3.10.1');
   });
 
   it('should find correct version intelligently', () => {
@@ -42,7 +32,7 @@ describe('requirey - integration', () => {
     });
 
     let a = requirer_1.require('lodash');
-    expect(a.VERSION).toBe('3.10.1');
+    expect(a.VERSION).to.equal('3.10.1');
 
     let requirer_2 = new ry.Requirer({
       dependencies: {
@@ -51,6 +41,6 @@ describe('requirey - integration', () => {
     });
 
     let b = requirer_2.require('lodash');
-    expect(b.VERSION).toBe('2.4.2');
+    expect(b.VERSION).to.equal('2.4.2');
   });
 });
