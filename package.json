@@ -4,7 +4,7 @@
   "description": "extending require to work with multiple versions of modules",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --env=node",
     "build": "babel src --source-maps --out-dir dist --ignore '**/*.test.js'",
     "prepublish": "npm run build"
   },
