@@ -25,19 +25,13 @@ describe('requirey - integration', () => {
   it('should fetch correct version', () => {
     let requirer = new ry.Requirer();
     let a = requirer.require('lodash@1.3.1');
-    expect(a.drop).toBeTruthy(); //for 1.x
-    expect(a.findLastIndex).toBeFalsy(); //for 2.x
-    expect(a.chunk).toBeFalsy(); //for 3.x
+    expect(a.VERSION).toBe('1.3.1'); 
 
     let b = requirer.require('lodash@2.4.2');
-    expect(b.drop).toBeTruthy(); //for 1.x
-    expect(b.findLastIndex).toBeTruthy(); //for 2.x
-    expect(b.chunk).toBeFalsy(); //for 3.x
+    expect(b.VERSION).toBe('2.4.2');
 
     let c = requirer.require('lodash@3.10.1');
-    expect(c.drop).toBeTruthy(); //for 1.x
-    expect(c.findLastIndex).toBeTruthy(); //for 2.x
-    expect(c.chunk).toBeTruthy(); //for 3.x
+    expect(c.VERSION).toBe('3.10.1');
   });
 
   it('should find correct version intelligently', () => {
@@ -48,7 +42,7 @@ describe('requirey - integration', () => {
     });
 
     let a = requirer_1.require('lodash');
-    expect(a.chunk).toBeTruthy();
+    expect(a.VERSION).toBe('3.10.1');
 
     let requirer_2 = new ry.Requirer({
       dependencies: {
@@ -57,7 +51,6 @@ describe('requirey - integration', () => {
     });
 
     let b = requirer_2.require('lodash');
-    expect(b.chunk).toBeFalsy();
-    expect(b.findLastIndex).toBeTruthy();
+    expect(b.VERSION).toBe('2.4.2');
   });
 });

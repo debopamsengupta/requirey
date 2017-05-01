@@ -19,7 +19,7 @@ class Requirer {
 		if (!satisfying_version) {
 			throw Error('no satisfying version found');
 		}
-		return niv.require(`${name}@${satisfying_version}`);
+		return niv.require(`${name}__${satisfying_version}`);
 	}
 };
 
@@ -42,7 +42,7 @@ const installAll = () => {
 const install = (name, version) => {
 	const valid_version = version ? semver.validRange(version, true) : 'latest';
 	const clean_version = valid_version.split(' ')[0].replace(/(>|=)/g, '');
-	niv.install(`${name}@${clean_version}`);
+	niv.install(`${name}@${clean_version}`, { destination: `${name}__${clean_version}` });
 };
 
 module.exports = function(opts, override) {
