@@ -16,8 +16,8 @@ describe('requirey', () => {
       let underTest = multi(config);
       underTest.installAll();
       expect(niv.install).toHaveBeenCalledTimes(2);
-      expect(niv.install).toHaveBeenCalledWith('lodash@1.0.0', { destination: 'lodash100' });
-      expect(niv.install).toHaveBeenCalledWith('lodash@2.0.0', { destination: 'lodash200' });
+      expect(niv.install).toHaveBeenCalledWith('lodash@1.0.0');
+      expect(niv.install).toHaveBeenCalledWith('lodash@2.0.0');
       niv.install.mockClear();
     });
   });
@@ -35,25 +35,25 @@ describe('requirey', () => {
     it('should install correctly with absolute versions', () => {
       underTest.install('lodash', '1.0.0');
       expect(niv.install).toHaveBeenCalledTimes(1);
-      expect(niv.install).toHaveBeenCalledWith('lodash@1.0.0', { destination: 'lodash100' });
+      expect(niv.install).toHaveBeenCalledWith('lodash@1.0.0');
     });
 
     it('should install correctly with caret', () => {
       underTest.install('lodash', '^1.1.0');
       expect(niv.install).toHaveBeenCalledTimes(1);
-      expect(niv.install).toHaveBeenCalledWith('lodash@1.1.0', { destination: 'lodash110' });
+      expect(niv.install).toHaveBeenCalledWith('lodash@1.1.0');
     });
 
     it('should install correctly with tilde', () => {
       underTest.install('lodash', '~1.1.0');
       expect(niv.install).toHaveBeenCalledTimes(1);
-      expect(niv.install).toHaveBeenCalledWith('lodash@1.1.0', { destination: 'lodash110' });
+      expect(niv.install).toHaveBeenCalledWith('lodash@1.1.0');
     });
 
     it('should install correctly with no version', () => {
       underTest.install('lodash');
       expect(niv.install).toHaveBeenCalledTimes(1);
-      expect(niv.install).toHaveBeenCalledWith('lodash@latest', { destination: 'lodashlatest' });
+      expect(niv.install).toHaveBeenCalledWith('lodash@latest');
     });
   });
 
@@ -91,7 +91,7 @@ describe('requirey', () => {
       const requirer = new underTest.Requirer({ dependencies: { lodash: '^2.0.0' } });
       requirer.require('lodash', '3.0.0', true);
       expect(niv.require).toHaveBeenCalledTimes(1);
-      expect(niv.require).toHaveBeenCalledWith('lodash300');
+      expect(niv.require).toHaveBeenCalledWith('lodash@3.0.0');
     });
 
     it('should get correct version from name', () => {
@@ -99,7 +99,7 @@ describe('requirey', () => {
       const requirer = new underTest.Requirer({ dependencies: { lodash: '^2.0.0' } });
       requirer.require('lodash@~2.0.0');
       expect(niv.require).toHaveBeenCalledTimes(1);
-      expect(niv.require).toHaveBeenCalledWith('lodash200');
+      expect(niv.require).toHaveBeenCalledWith('lodash@2.0.0');
     });
 
     it('should get max possible version when no package.json given', () => {
@@ -107,7 +107,7 @@ describe('requirey', () => {
       const requirer = new underTest.Requirer();
       requirer.require('lodash');
       expect(niv.require).toHaveBeenCalledTimes(1);
-      expect(niv.require).toHaveBeenCalledWith('lodash1500');
+      expect(niv.require).toHaveBeenCalledWith('lodash@15.0.0');
     });
 
     it('should get correct version based on package.json given with caret', () => {
@@ -115,7 +115,7 @@ describe('requirey', () => {
       const requirer = new underTest.Requirer({ dependencies: { lodash: '^2.0.0' } });
       requirer.require('lodash');
       expect(niv.require).toHaveBeenCalledTimes(1);
-      expect(niv.require).toHaveBeenCalledWith('lodash220');
+      expect(niv.require).toHaveBeenCalledWith('lodash@2.2.0');
     });
 
     it('should get correct version based on package.json given with tilde', () => {
@@ -123,7 +123,7 @@ describe('requirey', () => {
       const requirer = new underTest.Requirer({ dependencies: { lodash: '~3.1.0' } });
       requirer.require('lodash');
       expect(niv.require).toHaveBeenCalledTimes(1);
-      expect(niv.require).toHaveBeenCalledWith('lodash316');
+      expect(niv.require).toHaveBeenCalledWith('lodash@3.1.6');
     });
   });
 });
