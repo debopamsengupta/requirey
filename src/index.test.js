@@ -7,7 +7,7 @@ jest.mock('npm-install-version', () => ({
   })
 );
 
-describe('multi-require', () => {
+describe('requirey', () => {
   describe('installAll', () => {
     it('should call install correctly', () => {
       let config = {
