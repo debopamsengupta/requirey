@@ -9,17 +9,24 @@ class Requirer {
 	}
 
 	require(name, version, force) {
+		const splitPaths = name.split('/');
+		name = splitPaths.shift();
+		const pathString = splitPaths.join('/');
+		const subPath = pathString ? `/${pathString}` : '';
+
 		if (name.split('@')[1]) {
 			version = name.split('@')[1];
 			name = name.split('@')[0];
 		}
+
 		const versionList = config[name] || [];
 		const version_needed = version || (this.pkgJson ? this.pkgJson.dependencies[name] : '*');
 		const satisfying_version  = force ? version : satisfier(version_needed, versionList);
 		if (!satisfying_version) {
 			throw Error('no satisfying version found');
 		}
-		return niv.require(`${name}@${satisfying_version}`);
+
+		return require(`${name}@${satisfying_version}${subPath}`);
 	}
 };
 
