@@ -48,6 +48,8 @@ requirer.require('lodash'); // ==> highest possible version supported
 requirer.require('lodash@1.0.0'); // ==> version 1.0.0
 requirer.require('lodash', '^2.0.0'); // ==> highest version in the range between 2.0.0 and 3.0.0
 requirer.require('lodash', '~2.2.0'); // ==> highest version in the range between 2.2.0 to 2.3.0
+requirer.require('lodash/fp/curry'); // ==> require sub-paths from auto-detected version
+requirer.require('lodash@3.0.0/array/chunk'); // ==> require sub-paths from particular version
 ```
 
 The `require` method also takes an optional third parameter:
