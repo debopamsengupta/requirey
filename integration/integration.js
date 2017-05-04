@@ -45,4 +45,15 @@ describe('requirey - integration', () => {
     let b = requirer_2.require('lodash');
     expect(b.VERSION).to.equal('2.4.2');
   });
+
+  it('should be able to require subpaths', () => {
+    let requirer_1 = new ry.Requirer({
+      dependencies: {
+        lodash: '^3.0.0'
+      }
+    });
+
+    let a = requirer_1.require('lodash/array/chunk');
+    expect(typeof a).to.equal('function');
+  });
 });

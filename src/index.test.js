@@ -7,6 +7,14 @@ jest.mock('npm-install-version', () => ({
   })
 );
 
+jest.mock('lodash@3.0.0', () => 'lodash@3.0.0', { virtual: true });
+jest.mock('lodash@2.0.0', () => 'lodash@2.0.0', { virtual: true });
+jest.mock('lodash@2.0.0/package.json', () => 'lodash@2.0.0/package.json', { virtual: true });
+jest.mock('lodash@15.0.0', () => 'lodash@15.0.0', { virtual: true });
+jest.mock('lodash@2.2.0', () => 'lodash@2.2.0', { virtual: true });
+jest.mock('lodash@3.1.6', () => 'lodash@3.1.6', { virtual: true });
+jest.mock('lodash@3.1.6/package.json', () => 'lodash@3.1.6/package.json', { virtual: true });
+
 describe('requirey', () => {
   describe('installAll', () => {
     it('should call install correctly', () => {
@@ -89,41 +97,50 @@ describe('requirey', () => {
     it('should not throw error when force to get version', () => {
       underTest = multi({ lodash: ['2.0.0'] }, true);
       const requirer = new underTest.Requirer({ dependencies: { lodash: '^2.0.0' } });
-      requirer.require('lodash', '3.0.0', true);
-      expect(niv.require).toHaveBeenCalledTimes(1);
-      expect(niv.require).toHaveBeenCalledWith('lodash@3.0.0');
+      let a = requirer.require('lodash', '3.0.0', true);
+      expect(a).toBe('lodash@3.0.0');
     });
 
     it('should get correct version from name', () => {
       underTest = multi({ lodash: ['2.0.0'] }, true);
       const requirer = new underTest.Requirer({ dependencies: { lodash: '^2.0.0' } });
-      requirer.require('lodash@~2.0.0');
-      expect(niv.require).toHaveBeenCalledTimes(1);
-      expect(niv.require).toHaveBeenCalledWith('lodash@2.0.0');
+      let a = requirer.require('lodash@~2.0.0');
+      expect(a).toBe('lodash@2.0.0');
     });
 
     it('should get max possible version when no package.json given', () => {
       underTest = multi({ lodash: ['2.0.0', '3.0.0', '15.0.0'] }, true);
       const requirer = new underTest.Requirer();
-      requirer.require('lodash');
-      expect(niv.require).toHaveBeenCalledTimes(1);
-      expect(niv.require).toHaveBeenCalledWith('lodash@15.0.0');
+      let a = requirer.require('lodash');
+      expect(a).toBe('lodash@15.0.0');
     });
 
     it('should get correct version based on package.json given with caret', () => {
       underTest = multi({ lodash: ['2.0.0', '2.2.0', '3.0.0', '15.0.0'] }, true);
       const requirer = new underTest.Requirer({ dependencies: { lodash: '^2.0.0' } });
-      requirer.require('lodash');
-      expect(niv.require).toHaveBeenCalledTimes(1);
-      expect(niv.require).toHaveBeenCalledWith('lodash@2.2.0');
+      let a = requirer.require('lodash');
+      expect(a).toBe('lodash@2.2.0');
     });
 
     it('should get correct version based on package.json given with tilde', () => {
       underTest = multi({ lodash: ['2.0.0', '3.0.0', '3.1.6', '3.2.0'] }, true);
       const requirer = new underTest.Requirer({ dependencies: { lodash: '~3.1.0' } });
-      requirer.require('lodash');
-      expect(niv.require).toHaveBeenCalledTimes(1);
-      expect(niv.require).toHaveBeenCalledWith('lodash@3.1.6');
+      let a = requirer.require('lodash');
+      expect(a).toBe('lodash@3.1.6');
+    });
+
+    it('should require subpath', () => {
+      underTest = multi({ lodash: ['2.0.0', '3.0.0', '3.1.6', '3.2.0'] }, true);
+      const requirer = new underTest.Requirer({ dependencies: { lodash: '~3.1.0' } });
+      let a = requirer.require('lodash/package.json');
+      expect(a).toBe('lodash@3.1.6/package.json');
+    });
+
+    it('should require subpath with specified version', () => {
+      underTest = multi({ lodash: ['2.0.0', '3.0.0', '3.1.6', '3.2.0'] }, true);
+      const requirer = new underTest.Requirer({ dependencies: { lodash: '~3.1.0' } });
+      let a = requirer.require('lodash@2.0.0/package.json');
+      expect(a).toBe('lodash@2.0.0/package.json');
     });
   });
 });
