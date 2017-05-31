@@ -52,12 +52,17 @@ const install = (name, version) => {
 	niv.install(`${name}@${clean_version}`);
 };
 
-module.exports = function(opts, override) {
+module.exports = (opts, override) => {
 	if (override) {
 		Object.keys(config).forEach((key) => {
 			delete config[key];
 		});
 	}
+	Object.keys(opts).forEach((option) => {
+		if(!Array.isArray(opts[option])) {
+			opts[option] = [opts[option]];
+		}
+	});
 	Object.assign(config, opts);
 	return { installAll, install, Requirer };
 };
