@@ -2,6 +2,14 @@
 
 All major changes to the project will be noted here
 
+## 2.1.1
+### Added
+- Allowing config to have single version or array of versions for each dependency
+
+## 2.1.0
+### Added
+- Ability to require sub-paths via `requirey`
+
 ## 2.0.1 
 ### Added 
 - Appveyor tests to ensure windows support

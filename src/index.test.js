@@ -28,6 +28,17 @@ describe('requirey', () => {
       expect(niv.install).toHaveBeenCalledWith('lodash@2.0.0');
       niv.install.mockClear();
     });
+
+    it('should call install correctly with config of single version', () => {
+      let config = {
+        lodash: '1.0.0'
+      };
+      let underTest = multi(config);
+      underTest.installAll();
+      expect(niv.install).toHaveBeenCalledTimes(1);
+      expect(niv.install).toHaveBeenCalledWith('lodash@1.0.0');
+      niv.install.mockClear();
+    });
   });
 
   describe('install', () => {
