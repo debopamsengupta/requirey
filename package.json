@@ -1,6 +1,6 @@
 {
   "name": "requirey",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "extending require to work with multiple versions of modules",
   "main": "dist/index.js",
   "scripts": {

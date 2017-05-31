@@ -44,7 +44,7 @@ describe('requirey', () => {
   describe('install', () => {
     let underTest;
     beforeEach(() => {
-      underTest = multi({});
+      underTest = multi();
     });
 
     afterEach(() => {

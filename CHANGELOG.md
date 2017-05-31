@@ -2,6 +2,10 @@
 
 All major changes to the project will be noted here
 
+## 2.1.2
+### Added
+- Having default for config options
+
 ## 2.1.1
 ### Added
 - Allowing config to have single version or array of versions for each dependency

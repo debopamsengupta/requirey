@@ -52,7 +52,7 @@ const install = (name, version) => {
 	niv.install(`${name}@${clean_version}`);
 };
 
-module.exports = (opts, override) => {
+module.exports = (opts = {}, override) => {
 	if (override) {
 		Object.keys(config).forEach((key) => {
 			delete config[key];
