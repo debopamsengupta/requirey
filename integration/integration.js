@@ -7,11 +7,9 @@ const config = {
 
 describe('requirey - integration', () => {
   let ry;
-  before(() => {
-    ry = requirey(config);
-  });
 
   it('should install all and be requireable', (done) => {
+    ry = requirey(config, { strict: false });
     ry.installAll();
     let requirer = new ry.Requirer();
     let a = requirer.require('lodash@1.3.1');
@@ -26,7 +24,8 @@ describe('requirey - integration', () => {
     done();
   });
 
-  it('should find correct version intelligently', () => {
+  it('should find correct version intelligently in strict mode', () => {
+    ry = requirey(config);
     let requirer_1 = new ry.Requirer({
       dependencies: {
         lodash: '^3.0.0'
@@ -46,7 +45,8 @@ describe('requirey - integration', () => {
     expect(b.VERSION).to.equal('2.4.2');
   });
 
-  it('should be able to require subpaths', () => {
+  it('should be able to require subpaths in strict mode', () => {
+    ry = requirey(config);
     let requirer_1 = new ry.Requirer({
       dependencies: {
         lodash: '^3.0.0'

@@ -1,7 +1,8 @@
 import niv from 'npm-install-version';
 import semver from 'semver';
 
-const config = {};
+const globalConfig = {};
+let strict = true;
 
 class Requirer {
 	constructor(pkg) {
@@ -19,9 +20,17 @@ class Requirer {
 			name = name.split('@')[0];
 		}
 
-		const versionList = config[name] || [];
-		const version_needed = version || (this.pkgJson ? this.pkgJson.dependencies[name] : '*');
-		const satisfying_version  = force ? version : satisfier(version_needed, versionList);
+		const versionList = globalConfig[name] || [];
+		let satisfying_version;
+		if (strict) {
+			const version_needed = this.pkgJson ? this.pkgJson.dependencies[name] : '*';
+			satisfying_version = satisfier(version_needed, versionList);
+		}
+		else {
+			const version_needed = version || (this.pkgJson ? this.pkgJson.dependencies[name] : '*');
+			satisfying_version = force ? version : satisfier(version_needed, versionList);
+		}
+		
 		if (!satisfying_version) {
 			throw Error('no satisfying version found');
 		}
@@ -38,8 +47,8 @@ const satisfier = (version, version_list) => {
 };
 
 const installAll = () => {
-	Object.keys(config).forEach((moduleName) => {
-		const versions = config[moduleName] || [];
+	Object.keys(globalConfig).forEach((moduleName) => {
+		const versions = globalConfig[moduleName] || [];
 		versions.forEach((version) => {
 			install(moduleName, version);
 		});
@@ -49,20 +58,33 @@ const installAll = () => {
 const install = (name, version) => {
 	const valid_version = version ? semver.validRange(version, true) : 'latest';
 	const clean_version = valid_version.split(' ')[0].replace(/(>|=)/g, '');
+
+	if (strict) {
+		if (!globalConfig[name]) {
+			throw Error(`${name} is not a supported module from the configuration`);
+		}
+
+		if (globalConfig[name].indexOf(clean_version) === -1) {
+			throw Error(`${name} with version ${clean_version} is not supported in the configuration`);
+		}
+	}
 	niv.install(`${name}@${clean_version}`);
 };
 
-module.exports = (opts = {}, override) => {
-	if (override) {
-		Object.keys(config).forEach((key) => {
-			delete config[key];
+module.exports = (configs = {}, options = {}) => {
+	if (options.override) {
+		Object.keys(globalConfig).forEach((key) => {
+			delete globalConfig[key];
 		});
 	}
-	Object.keys(opts).forEach((option) => {
-		if(!Array.isArray(opts[option])) {
-			opts[option] = [opts[option]];
+	if (options.strict === false) {
+		strict = options.strict;
+	}
+	Object.keys(configs).forEach((config) => {
+		if(!Array.isArray(configs[config])) {
+			configs[config] = [configs[config]];
 		}
 	});
-	Object.assign(config, opts);
+	Object.assign(globalConfig, configs);
 	return { installAll, install, Requirer };
 };
