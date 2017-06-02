@@ -2,6 +2,13 @@
 
 All major changes to the project will be noted here
 
+## 2.2.0
+### Added
+- Strict mode
+### Changed
+- Default behavior will now follow `strict` mode, treating the `config` as source of truth
+- Strict mode will ignore any version/force overrides for `require` calls
+
 ## 2.1.2
 ### Added
 - Having default for config options

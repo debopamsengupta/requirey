@@ -14,9 +14,14 @@ Intelligent multi-version dependency management for npm packages.
 - #### Initialize 
 
 ```js
-const ry = require('requirey')(config);
+const ry = require('requirey')(config, options);
 ```
-`config` - object of module names mapped to arrays of supported versions
+`config` - object of module names mapped to arrays of supported versions   
+`options` - extra options to override default behaviors like `strict`
+
+**Default behavior is strict mode enabled which will always use config to determine which versions can be installed and required**
+
+**Strict mode will ignore version overrides for require calls**
 
 eg: 
 ```js
